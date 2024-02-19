@@ -19,3 +19,8 @@ class HousingException(Exception):
         error_message=f"Erro occured in scrip: [{file_number}] at line number: [{line_number}] error message: [{error_message}]"     
 
         return error_message
+    def __str__(self) -> str:
+        return self.error_message
+    
+    def __repr__(self) -> str:
+        return HousingException.__name__.str()
