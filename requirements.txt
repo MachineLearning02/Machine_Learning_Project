@@ -2,5 +2,5 @@ Flask
 gunicorn
 Pandas 
 numpy 
-sklearn
+scikit-learn
 pyYAML

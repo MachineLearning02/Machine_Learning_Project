@@ -1,10 +1,10 @@
-from housing.pipeline.pipeline import pipeline
+from housing.pipeline.pipeline import Pipeline
 from housing.excepton import HousingException
 from housing.logger import logging
 
 def main():
     try:
-        pipeline = pipeline()
+        pipeline = Pipeline()
         pipeline.run_pipeline()
     except Exception as e:
         logging.info(f"{e}")
