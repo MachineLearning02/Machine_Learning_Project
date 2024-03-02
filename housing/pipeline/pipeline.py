@@ -15,6 +15,8 @@ class Pipeline:
         except Exception as e:
             raise HousingException(e,sys) from e
         
+   
+   
     def start_data_ingestion(self)->DataIngestionArtifact:
         try:
             data_ingestion=DataIngestion(data_ingestion_config=self.config.get_data_ingestion_config())
@@ -22,6 +24,8 @@ class Pipeline:
             return data_ingestion.initiate_data_ingestion()
         except Exception as e:
             raise HousingException(e,sys) from e
+    
+    
     
     def start_data_validation(self,data_ingestion_artifact:DataIngestionArtifact)->DataValidationArtifact:
         try:
@@ -32,15 +36,23 @@ class Pipeline:
         except Exception as e:
             raise HousingException(e,sys) from e
 
+    
+    
     def start_data_transformation(self):
         pass
 
+    
+    
     def start_model_trainer(self):
         pass
 
+    
+    
     def start_model_evaluation(self):
         pass
 
+    
+    
     def start_model_pusher(self):
         pass
 
