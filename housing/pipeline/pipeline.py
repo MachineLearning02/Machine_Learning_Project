@@ -64,6 +64,8 @@ class Pipeline:
     def start_model_pusher(self):
         pass
 
+
+
     def run_pipeline(self):
         try:
             #data ingestion
