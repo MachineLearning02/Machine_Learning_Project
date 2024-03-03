@@ -1,10 +1,14 @@
 import yaml
 from housing.excepton import HousingException
+from housing.constant import *
+import pandas as pd
 import os,sys
 import dill
-import pandas as pd
 import numpy as np
-from housing.constant import *
+
+
+
+
 
 def write_yaml_file(file_path:str,data:dict=None):
    
@@ -17,17 +21,19 @@ def write_yaml_file(file_path:str,data:dict=None):
         raise HousingException(e,sys) from e
 
 
-def read_yaml_file(file_path:str)->dict:
-    """
-    Reads a YAML file and returns the contents as a dictionary.
-    file_path: str
-    """
+
+
+def read_yaml_file(file_path):
+    
     try:
-        with open(file_path, 'rb') as yaml_file:
+        with open(file_path,"rb") as yaml_file:
             return yaml.safe_load(yaml_file)
     except Exception as e:
         raise HousingException(e,sys) from e
-    
+
+
+
+
 def load_data(file_path,schema_file_path):
     try:
         dataframe=pd.read_csv(file_path)

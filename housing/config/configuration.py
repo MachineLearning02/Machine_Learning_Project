@@ -7,14 +7,20 @@ import os,sys
 
 
 class configuration:
-    def __init__(self,
-                 config_file_path:str=CONFIG_FILE_PATH,
-                 current_time_stamp:str=CURRENT_TIME_STAMP) -> None:
-        self.config_info = read_yaml_file(file_path=config_file_path)
-        self.pipeline_config=self.get_training_pipeline_config()
-        self.time_stamp =current_time_stamp
-    
-  
+
+    def __init__(self,config_file_path=CONFIG_FILE_PATH,
+                 current_time_stamp=CURRENT_TIME_STAMP):
+        try:
+            self.config_info=read_yaml_file(config_file_path)
+            self.pipeline_config=self.get_pipeline_config()
+            self.time_stamp=CURRENT_TIME_STAMP
+
+        except Exception as e:
+            raise HousingException(e,sys) from e
+        
+
+
+
     def get_data_ingestion_config(self)->DataIngestionConfig:
         try:
             artifact_dir=self.pipeline_config.artifact_dir
@@ -103,7 +109,7 @@ class configuration:
 
 
 
-    def get_data_transformation_config(self)-> DataTransformationConfig:
+    def get_data_transformation_config(self)->DataTransformationConfig:
         try:
             artifact_dir=self.pipeline_config.artifact_dir
 
@@ -139,6 +145,7 @@ class configuration:
             
 
             return data_transformation_artifact
+            
         except Exception as e:
             raise HousingException(e,sys) from e
 
@@ -151,15 +158,16 @@ class configuration:
     def get_model_pusher_config(self):
         pass
 
-    def get_training_pipeline_config(self)->TrainingPipelineConfig:
+    def get_pipeline_config(self)-> TrainingPipelineConfig:
         try:
-            training_pipeline_info=self.config_info[TRAINING_PIPELINE_CONFIG_KEY]
+            training_pipeline_config= self.config_info[TRAINING_PIPELINE_CONFIG_KEY]
+
             artifact_dir=os.path.join(ROOT_DIR,
-                                      training_pipeline_info[TRAINING_PIPELINE_NAME_KEY],
-                                      training_pipeline_info[TRAINING_PIPELINE_ARTIFACT_DIR_KEY])
+                                      training_pipeline_config[TRAINING_PIPELINE_NAME_KEY],
+                                      training_pipeline_config[TRAINING_PIPELINE_ARTIFACT_DIR_KEY])
             
             training_pipeline_config=TrainingPipelineConfig(artifact_dir=artifact_dir)
-            logging.info(f"Training pipleine config: {training_pipeline_config}")
+            logging.info(f"pipeline artifact configuration [{training_pipeline_config}]")
             return training_pipeline_config
-        except Exception as e:
+        except Exception as e :
             raise HousingException(e,sys) from e
