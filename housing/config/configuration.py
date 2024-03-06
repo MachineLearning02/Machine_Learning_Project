@@ -182,11 +182,42 @@ class configuration:
         except Exception as e:
             raise HousingException(e,sys) from e
 
-    def get_model_evaluation_config(self):
-        pass
+    def get_model_evaluation_config(self)->ModelEvaluationConfig:
+        try:
+            evaluation_artifact=os.path.join(self.pipeline_config.artifact_dir,
+                                             MODEL_EVALUATION_ARTIFACT_DIR)
+            
+            model_evaluation_info=self.config_info[MODEL_EVALUATION_CONFIG_KEY]
+            
 
-    def get_model_pusher_config(self):
-        pass
+            model_evaluation_file_path=os.path.join(evaluation_artifact,
+                                                   model_evaluation_info[MODEL_EVALUATION_FILE_NAME_KEY])
+
+            
+            model_evaluation_config=ModelEvaluationConfig(model_evaluation_file_path=model_evaluation_file_path, 
+                                                          time_stamp=self.time_stamp)
+            
+            return model_evaluation_config
+        except Exception as e:
+            raise HousingException(e,sys) from e
+
+    def get_model_pusher_config(self)->ModelPusherConfig:
+        try:
+            time_stamp = f"{datetime.now().strftime('%Y%m%d%H%M%S')}"
+
+            model_pusher_info=self.config_info[MODEL_PUSHER_CONFIG_KEY]
+            
+            export_dir_path=os.path.join(ROOT_DIR,
+                                         model_pusher_info[MODEL_PUSHER_MODEL_EXPORT_DIR_KEY],
+                                         time_stamp)
+            
+            model_pusher_artifact=ModelPusherConfig(export_dir_path=export_dir_path)
+
+            return model_pusher_artifact
+            
+        except Exception as e:
+            raise HousingException(e,sys) from e
+
 
     def get_pipeline_config(self)-> TrainingPipelineConfig:
         try:
