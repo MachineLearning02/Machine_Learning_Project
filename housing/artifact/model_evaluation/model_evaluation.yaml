@@ -1,5 +1,9 @@
 best_model:
-  model_path: C:\Users\yashr\OneDrive\Desktop\Machine Learning\Project\Machine_Learning_Project\housing\artifact\model_trainer\2024-03-06-21-31-04\trained_model\model.pkl
+  model_path: C:\Users\yashr\OneDrive\Desktop\Machine Learning\Project\Machine_Learning_Project\housing\artifact\model_trainer\2024-03-06-21-56-27\trained_model\model.pkl
 history:
   2024-03-06-21-31-04:
     model_path: C:\Users\yashr\OneDrive\Desktop\Machine Learning\Project\Machine_Learning_Project\housing\artifact\model_trainer\2024-03-06-21-12-55\trained_model\model.pkl
+  2024-03-06-21-51-56:
+    model_path: C:\Users\yashr\OneDrive\Desktop\Machine Learning\Project\Machine_Learning_Project\housing\artifact\model_trainer\2024-03-06-21-31-04\trained_model\model.pkl
+  2024-03-06-21-56-27:
+    model_path: C:\Users\yashr\OneDrive\Desktop\Machine Learning\Project\Machine_Learning_Project\housing\artifact\model_trainer\2024-03-06-21-56-27\trained_model\model.pkl
